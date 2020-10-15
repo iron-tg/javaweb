@@ -1,0 +1,28 @@
+version: "3.3"
+services:
+  mysql:
+    image: mysql:latest
+    container_name: a4mysql
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=123456
+    ports:
+      - "3306:3306"
+    networks:
+      - my-net
+
+  tomcat:
+    build: ./tomcat
+    container_name: a4myweb
+    ports:
+        - "8080:8080"
+    volumes:  
+        - "$PWD/webapps:/usr/local/tomcat/webapps"
+    depends_on:
+        - mysql
+    networks:   
+        - my-net  
+
+networks:
+  my-net:
+    driver: bridge
