@@ -12,12 +12,10 @@ services:
       - my-net
 
   tomcat:
-    build: ./tomcat
+    build: ./tc
     container_name: a4myweb
     ports:
         - "8080:8080"
-    volumes:  
-        - "$PWD/webapps:/usr/local/tomcat/webapps"
     depends_on:
         - mysql
     networks:   
